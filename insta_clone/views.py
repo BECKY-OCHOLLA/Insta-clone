@@ -4,4 +4,5 @@ from django.shortcuts import render
 
 def index(request):
     title='welcome'
+    
     return render(request,'insta/index.html',{'title':title})
