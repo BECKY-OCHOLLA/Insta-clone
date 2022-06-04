@@ -12,7 +12,7 @@ def index(request):
     title='welcome'
     
     return render(request,'insta/index.html',{'title':title})
-    
+
 @login_required(login_url='/accounts/login/')
 def user_login(request):
     if request.method=="POST":
@@ -30,5 +30,9 @@ def user_login(request):
     else:
         return render(request, "auth/login.html", context={})
 
-        ...
+@login_required(login_url='/accounts/login/')
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect(reverse("user_login"))
+
   
