@@ -41,5 +41,11 @@ class Comment(models.Model):
     def __str__(self):
         return self.comment
 
+@classmethod
+def search_user(cls,search_term):
+        theuser = cls.objects.filter(user__icontains=search_term)
+        return theuser
+
+
 
    

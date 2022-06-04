@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index,name='index'),
-    # path('logout/', views.logout, {"next_page": '/'}), 
+    path("search/", views.search, name="search"),
 
 ]
 

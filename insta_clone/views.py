@@ -13,6 +13,24 @@ def index(request):
     
     return render(request,'insta/index.html',{'title':title})
 
+def search(request):
+
+    if 'profile' in request.GET and request.GET["article"]:
+        search_term = request.GET.get("profile")
+        searched_user = UserProfile.search_user(search_term)
+        message = f"{search_term}"
+        user = User.objects.all()
+        context = {
+            "user":user,
+            "message":message,
+            "profile":searched_user
+        }
+        return render(request,'insta/search_results.html',context)
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'insta/search_results.html',{"message":message})
+
 # @login_required(login_url='/accounts/login/')
 # def user_login(request):
 #     if request.method=="POST":
