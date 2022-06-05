@@ -10,9 +10,36 @@ from django.urls import reverse
 
 @login_required(login_url='/accounts/login/')
 def index(request):
-    title='welcome'
+    current_user = request.user
+    print(current_user)
+    current_profile = UserProfile.objects.get(user_id=current_user)
+    posts = Image.objects.all()[::-1]
+    comments = Comment.objects.all()
+
+    if request.method == "POST":
+        post_form = PostForm(request.POST, request.FILES)
+
+        if post_form.is_valid():
+            post = post_form.save(commit=False)
+
+            post.profile = current_user
+            post.user_profile = current_profile
+
+            post.save()
+            post_form = PostForm()
+            return HttpResponseRedirect(reverse("index"))
+
+    else:
+        post_form = PostForm()
+
     
-    return render(request,'insta/index.html',{'title':title})
+
+    return render(request, "insta/index.html", context={"posts":posts,
+                                                           "current_user":current_user,
+                                                           "current_profile":current_profile,
+                                                           "post_form":post_form,
+                                                           "comments":comments})
+
 
 def search(request):
 
