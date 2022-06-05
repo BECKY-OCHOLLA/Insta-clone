@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from .models import Image, User, UserProfile, Comment
 # from django.contrib.auth import authenticate, login, logout
 # from django.http import HttpResponseRedirect
 # from django.urls import reverse
@@ -15,15 +16,12 @@ def index(request):
 
 def search(request):
 
-    if 'profile' in request.GET and request.GET["article"]:
+    if 'profile' in request.GET and request.GET["profile"]:
         search_term = request.GET.get("profile")
         searched_user = UserProfile.search_user(search_term)
         message = f"{search_term}"
         user = User.objects.all()
-        context = {
-            "user":user,
-            "message":message,
-            "profile":searched_user
+        context = {"user":user,"message":message,"profile":searched_user
         }
         return render(request,'insta/search_results.html',context)
 

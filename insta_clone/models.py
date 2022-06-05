@@ -23,6 +23,12 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.bio
 
+    @classmethod
+    def search_user(cls,search_term):
+        theuser = cls.objects.filter(user__icontains=search_term)
+        return theuser
+
+
     def save_post(self):
         self.save()
 
@@ -41,10 +47,6 @@ class Comment(models.Model):
     def __str__(self):
         return self.comment
 
-@classmethod
-def search_user(cls,search_term):
-        theuser = cls.objects.filter(user__icontains=search_term)
-        return theuser
 
 
 
