@@ -6,7 +6,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index,name='index'),
+    # path("profile/<profile>", views.profile, name="profile"),
     path("search/", views.search, name="search"),
+    path("profile/(<profile>", views.profile, name="profile"),
+    path("like/<like>", views.like, name="like"),
+    path("like-post/<like-post>", views.like_post, name="like_post"),
+    path("post/<post>", views.post, name="post"),
 
 ]
 if settings.DEBUG:

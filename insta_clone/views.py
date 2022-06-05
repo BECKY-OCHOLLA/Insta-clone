@@ -21,7 +21,10 @@ def search(request):
         searched_user = UserProfile.search_user(search_term)
         message = f"{search_term}"
         user = User.objects.all()
-        context = {"user":user,"message":message,"profile":searched_user
+        context = {
+            "user":user,
+            "message":message,
+            "profile":searched_user
         }
         return render(request,'insta/search_results.html',context)
 

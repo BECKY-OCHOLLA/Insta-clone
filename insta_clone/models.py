@@ -11,10 +11,10 @@ class Image(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     likes = models.IntegerField(default=0)
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
-    # user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class UserProfile(models.Model):
-    # User=models.ForeignKey(User, on_delete=models.CASCADE)
+    # User=models.OneToOneField(User, on_delete=models.CASCADE)
     profile_Photo=CloudinaryField('image')
     bio=models.TextField(blank=True)
     followers = models.ManyToManyField(User, related_name="followers", blank=True)
