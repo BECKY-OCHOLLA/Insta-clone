@@ -32,6 +32,15 @@ def search(request):
         message = "You haven't searched for any term"
         return render(request, 'insta/search_results.html',{"message":message})
 
+
+@login_required
+def profile(request, id):
+    user = User.objects.get(id=id)
+    profile = UserProfile.objects.get(user_id=user)
+    posts = Image.objects.filter(profile__id=id)[::-1]
+    return render(request, "insta/profile.html", context={"user":user,"profile":profile,"posts":posts})
+
+
 # @login_required(login_url='/accounts/login/')
 # def user_login(request):
 #     if request.method=="POST":
