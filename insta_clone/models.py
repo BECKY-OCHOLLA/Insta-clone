@@ -36,7 +36,7 @@ class Profile(models.Model):
 
 
 # Create your models here.
-class Image(models.Model):
+class Post(models.Model):
     image = models.ImageField(upload_to = 'images/')
     image_name = models.CharField(max_length =30)
     image_caption = models.TextField(max_length =40)
@@ -50,7 +50,7 @@ class Image(models.Model):
 class Comment(models.Model):
     name = models.CharField(max_length=256)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ForeignKey(Image, on_delete=models.CASCADE)
+    image = models.ForeignKey(Post, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.comment

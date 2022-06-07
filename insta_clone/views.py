@@ -20,12 +20,12 @@ from django.urls import reverse
 
 # Create your views here.
 @login_required(login_url='/accounts/login/')
-def home(request):
+def index(request):
     context = {
     'posts':Post.objects.all()
     }
     
-    return render(request, 'index.html',context)
+    return render(request, 'insta/index.html',context)
 
 # class PostListView(ListView):
 #     model=Post

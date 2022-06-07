@@ -5,14 +5,13 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    path('', views.index,name='index'),
-    path("search/", views.search, name="search"),
-    path("profile/", views.profile, name="profile"),
-    path('upload/', views.upload_image, name='upload_image'),
-    # path("like_post/<like_post>", views.like_post, name="like_post"),
-    path("post/<post>", views.post, name="post"),
-    # path('logout/', views.user_logout, name='user_logout'),
-
+    path('',views.index, name='index'),
+    path('<int:pk>',views.likes, name='likes'),
+    path('create_post/',views.create_post,name='create_post'),
+    path('search/',views.search_results,name='search_results'),
+    path('logout/',views.logout, name='logout'),
+    path('profile/',views.profile, name='profile'),
+  
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)
