@@ -15,17 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from django.contrib.auth import views
+from users import views as user_views
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('insta_clone.urls')),
-    path('accounts/',include('registration.backends.simple.urls')),
-    # path('logout/',views.logout,{"next_page":'/'}),
-    
-    # path('register/',views.register,name='register'),
-    # path('user_login/',views.user_login,name='user_login'),
-    # path('accounts/login/',views.user_login,name='user_login'),
-    # path('logout/', views.user_logout, name='user_logout'),
-
+    path('accounts/', include('django_registration.backends.one_step.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('logout/', auth_views.logout_then_login, name='logout'),
+    path('profile/', user_views.profile, name='profile'),
+  
 ]

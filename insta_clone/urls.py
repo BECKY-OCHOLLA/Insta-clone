@@ -7,10 +7,11 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.index,name='index'),
     path("search/", views.search, name="search"),
-    path("profile/(<profile>", views.profile, name="profile"),
-    path("like/<like>", views.like, name="like"),
-    path("like_post/<like_post>", views.like_post, name="like_post"),
+    path("profile/", views.profile, name="profile"),
+    path('upload/', views.upload_image, name='upload_image'),
+    # path("like_post/<like_post>", views.like_post, name="like_post"),
     path("post/<post>", views.post, name="post"),
+    # path('logout/', views.user_logout, name='user_logout'),
 
 ]
 if settings.DEBUG:

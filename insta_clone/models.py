@@ -20,7 +20,7 @@ class Profile(models.Model):
     
     @classmethod
     def search_user(cls,search_term):
-        theuser = cls.objects.filter(user__icontains=search_term)
+        theuser = Profile.objects.filter(user__icontains=search_term)
         return theuser
 
 
@@ -48,7 +48,7 @@ class Image(models.Model):
    
 
 class Comment(models.Model):
-    comment = models.CharField(max_length=256)
+    name = models.CharField(max_length=256)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ForeignKey(Image, on_delete=models.CASCADE)
 
