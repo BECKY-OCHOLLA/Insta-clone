@@ -1,8 +1,6 @@
 from django.shortcuts import render,redirect
-from .models import Image,Profile, Comment
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from django.shortcuts import render,redirect,HttpResponse
 from django.contrib import messages
 from .forms import *
 from django.views.decorators.csrf import csrf_protect

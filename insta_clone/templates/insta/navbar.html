@@ -1,19 +1,78 @@
-<nav class="navbar navbar-dark fixed-top mb-4" style="padding-top: 0; padding-bottom:0; background:#fff;">
-    <div class="container">
-        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{%url 'index'%}" style="color: #333;"><i style="font-size: 30px;"
-                class="fab fa-instagram fa-lg"></i> <span
-                id="insta"  >Instagram</span></a>
-        <form class="search mx-auto" action="{%url 'search'%}" method="GET">
-            <input type="text" class="search-textbox" placeholder="Search" name="search">
-            <input type="submit" name="" id="" hidden>
-        </form>
-                
-        
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="" style="color: #333;"><i class="fas fa-power-off"></i></a>
-                <a class="nav-link" href="" style="color: #333;"><i class="far fa-user fa-lg"></i></a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+<body>
+    <nav class="navbar navbar-inverse" style="background-color:rgba(255, 255, 255, .15); border:none; position: fixed; top:0; height: 25px;margin-bottom: 10%; width: 100%;">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <img  style="height: 50px; width: 200px;"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzFj87v7cdZAMuQzMol5zsNpdwU87kaGE270YOjLf8vIklU9dfvQnZ_yKE5AiLvgttPA&usqp=CAU" alt="" srcset="">
+      </div>
+      
+      <!-- Adding a search form  -->
+      <div class="col-sm-6 col-md-6">
+            {% if user.is_authenticated %}
+            <ul style="list-style-type:none ; margin-top: 1%;">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button" aria-expanded="false">Account
+                          <span class="caret"></span>
+                      </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a href="{% url 'home' %}">Home</a>
+                  </li>
+                  <li>
+                    <a href="/accounts/password/change">Change Password</a>
+                  </li>
+                  <li>
+                    <a href="/profile">profile</a>
+                  </li>
+                  
+                  <li>
+                    <a href="{% url 'logout'%}">Logout</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            {% else %}
+            <li>
+              <a class='btn btn-default' href="/accounts/login">Login</a>
             </li>
-        </ul>
+
+            {% endif %}
+
+            <!-- <ul class="navbar-nav" style="margin-top: 15px; font-size: medium;">
+        <a class="nav-item nav-link ml-4" href="{%url 'create_post'%}" style="color: rgb(18, 18, 224);" ><i class="fas fa-plus"></i>New Post</a>
+      </ul> -->
+          </div>
+
+      <div class="col-sm-4 col-md-4 navbar-right">
+        <div>
+          <ul class="navbar-nav" style="font-size:45px; margin-right: 3%;">
+            <a class="nav-item nav-link ml-4" href="{%url 'create_post'%}" style="color:black;margin: 1%;" ><i class="far fa-plus-square"></i></a>
+          </ul>
+        </div>
+      
+        <form class="navbar-form" role="search" action="{% url 'search_results' %}">
+
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search title" name="post">
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+      
     </div>
-</nav>
+  </nav>
+      <!-- search form end -->
+ 
+    
+</body>
+</html>

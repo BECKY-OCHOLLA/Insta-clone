@@ -24,12 +24,12 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Image',
+            name='Post',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('image', models.ImageField(upload_to='images/')),
                 ('image_name', models.CharField(max_length=30)),
-                ('image_caption', models.TextField(max_length=40)),
+                ('caption', models.TextField(max_length=40)),
                 ('likes', models.CharField(blank=True, max_length=20)),
                 ('pub_date', models.DateTimeField(auto_now_add=True, null=True)),
                 ('profile', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='image', to='insta_clone.profile')),

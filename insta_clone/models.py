@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
-    Profile_photo = models.ImageField(upload_to = 'images/',blank=True)
+    image=models.ImageField(upload_to = 'images/',blank=True)
     bio=models.TextField(blank=True)
     user = models.OneToOneField(User,on_delete=models.CASCADE, primary_key=True)
 
@@ -19,10 +19,9 @@ class Profile(models.Model):
         return details
     
     @classmethod
-    def search_user(cls,search_term):
-        theuser = Profile.objects.filter(user__icontains=search_term)
-        return theuser
-
+    def search_by_title(cls,search_term):
+        profiles=cls.objects.filter(title__icontains=search_term)
+        return profiles
 
     def save_post(self):
         self.save()
@@ -39,8 +38,9 @@ class Profile(models.Model):
 class Post(models.Model):
     image = models.ImageField(upload_to = 'images/')
     image_name = models.CharField(max_length =30)
-    image_caption = models.TextField(max_length =40)
+    caption = models.TextField(max_length =40)
     likes = models.CharField(max_length =20,blank =True)
+    title = models.CharField(max_length=100, default='')
     profile = models.ForeignKey(Profile, null = True,related_name='image',on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True, null=True)
     comment = models.ForeignKey
@@ -49,6 +49,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     name = models.CharField(max_length=256)
+    comment = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ForeignKey(Post, on_delete=models.CASCADE)
 
