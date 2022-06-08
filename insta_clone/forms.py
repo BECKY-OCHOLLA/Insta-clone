@@ -3,16 +3,16 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import *
 
-class UpdateForm(forms.ModelForm):
-    """
-    class that handles forms
-    """
+# class UpdateForm(forms.ModelForm):
+#     """
+#     class that handles forms
+#     """
 
-    class Meta:
-        model=Post
+#     class Meta:
+#         model=Post
 
-        fields=['image','title','caption']
-        exclude=['likes','pub_date','comments','user']
+#         fields=['image','title','caption']
+#         exclude=['likes','pub_date','comments','user']
 
 class CommentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
@@ -36,10 +36,23 @@ class RegistrationForm(UserCreationForm):
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
     bio = forms.CharField() 
+    image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
 
     class Meta:
         model = User
         fields = ['username','email']
+
+
+
+class UpdateForm(forms.ModelForm):
+    image = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    image_name = forms.CharField(max_length=100,required=True,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    caption = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
+    likes= forms.CharField(max_length=100,required=True,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    title= forms.CharField(max_length=100,required=True,widget=forms.TextInput(attrs={'class': 'form-control'}))
+    class Meta:
+        model = Profile
+        fields = ['image','image_name','caption','likes','title']
 
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:

@@ -20,10 +20,18 @@ from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('',include('insta_clone.urls')),
-    path('accounts/', include('django_registration.backends.one_step.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
-   # path('logout/', auth_views.logout_then_login, name='logout'),
+    # path('admin/', admin.site.urls),
+    # path('',include('insta_clone.urls')),
+    # path('accounts/', include('django_registration.backends.one_step.urls')),
+    # path('accounts/', include('django.contrib.auth.urls')),
+    # path('logout/', auth_views.logout_then_login, name='logout'),
     # path('profile/',views.profile, name='profile'),
+
+
+    path('admin/', admin.site.urls),
+    path('', include('gram.urls')),
+    path('accounts/', include('registration.backends.simple.urls')),
+    path('tinymce/', include('tinymce.urls')),
+    path('logout/', auth_views.logout_then_login),
+
  ]

@@ -1,3 +1,4 @@
+from distutils.command import upload
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from django.http import HttpResponse
@@ -60,17 +61,64 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         else:
             return False
 
+# @login_required(login_url='/accounts/login/')
+# def create_post(request):
+
+#     if request.method =='POST':
+#         image = request.FILES.get('image')
+#         caption = request.POST.get('caption')
+
+#         print(image)
+
+#         img=Post(image=image,caption=caption,user=request.user)
+#         img.save_image()
+#         return redirect('index')
+#     return render(request,'insta/newpost.html')
+
+
+
+
 @login_required(login_url='/accounts/login/')
 def create_post(request):
+    profile_form=UpdateForm()
+    
+    if request.method == 'POST':
+        
+        profile_form = UpdateForm(request.POST,request.FILES, instance=request.user.profile)
 
-    if request.method =='POST':
-        image = request.FILES.get('photo')
-        caption = request.POST.get('caption')
+        if profile_form.is_valid():
+            profile_form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect('profile')
+       
+        else:
+           
+           profile_form = UpdateForm(instance=request.user.profile)
 
-        img=Post(image=image,caption=caption,user=request.user)
-        img.save_image()
-        return redirect('index')
-    return render(request,'insta/newpost.html')
+           return render(request, 'insta/newpost.html', {'profile_form': profile_form})
+
+    return render(request, 'insta/newpost.html', {'profile_form': profile_form})
+
+
+# def create_post(request):
+   
+    
+#     if request.method == 'POST':
+        
+#         profile_form = UpdateForm(request.POST,request.FILES, instance=request.user.profile)
+
+#         if profile_form.is_valid():
+#             profile_form.save()
+#             messages.success(request, 'Your profile is updated successfully')
+#             return redirect('profile')
+       
+#         else:
+           
+#            profile_form = UpdateForm(instance=request.user.profile)
+
+#            return render(request, 'insta/newpost.html', {'profile_form': profile_form})
+
+#     return render(request, 'insta/newpost.html', {'profile_form': profile_form})
         
     
     # if request.method == 'POST':
