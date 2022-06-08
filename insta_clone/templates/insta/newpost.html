@@ -1,18 +1,21 @@
-{%extends 'base.html'%} 
-{% load crispy_forms_tags %} 
+{%extends './base.html'%} 
 {% block content %}
-<div class="container col-md-3 col-lg-4">
-	<form method="POST" enctype="multipart/form-data">
-		{% csrf_token %}
-		<fieldset class="form-group" style="margin-top:8% ;">
-			<legend class="mb-2">Add Post</legend>
-			{{ form|crispy }}
-		</fieldset>
-
-		<!-- {{form.as_p}} -->
-		<div class="form-group mx-auto my-3 d-flex justify-content-center">
-			<button class="btn btn-outline-primary mx-auto" type="submit">Post</button>
-		</div>
-	</form>
+<div class="col-md-6" style="margin-top: 150px;">
+	<h2 class="text-center">Create A New Post</h2>
+	<hr>
+	 <form action="" method="POST" enctype="multipart/form-data" class="mb-5">
+		 {% csrf_token %}
+		 <div class="form-group mb-3">
+			 <label for="file">Select image file</label>
+			 <input type="file" class="form-control input-lg shadow-none" name="photo" required />
+		 </div>
+		 <div class="form-group mb-3">
+			 <label for="">Caption</label>
+			 <input type="caption" class="form-control input-lg shadow-none" name="description" required />
+		 </div>
+		 <input type="submit" class="btn btn-info btn-md" value="POST">
+	 </form>
 </div>
+
+
 {% endblock content %}

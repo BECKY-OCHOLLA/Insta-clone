@@ -1,10 +1,13 @@
-{%extends "registration/base.html"%}
+{%extends "./base.html" %}
 {% load bootstrap4 %}
 {% block content %}
 <div class="container">
   <div class="row">
     <!-- Empty div -->
-    <div class="col-md-4"></div>
+    <div class="col-md-5" style="padding-top: 55px;position: centre;" >
+      <img  src="https://ucarecdn.com/f0e65890-b403-4316-8068-d1dd58c8f80f/instagram.png" alt="instagram">
+    </div>
+    <div class="col-md-1"></div>
     <div class="col-md-4">
       {% if form.errors %}
         <p> Password or Username is incorrect </p>
@@ -12,7 +15,8 @@
       <div class="panel panel-default">
 
         <div class="panel-heading">
-          <h3 class="text-center">LogIn</h3>
+                  <img  style="height: 50px; width: 200px;"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzFj87v7cdZAMuQzMol5zsNpdwU87kaGE270YOjLf8vIklU9dfvQnZ_yKE5AiLvgttPA&usqp=CAU" alt="" srcset="">
+
         </div>
         <div class="panel-body">
 
@@ -23,21 +27,25 @@
             <div class="form-group">
               <input type="submit" class="btn btn-primary btn-sm" value="Login">
             </div>
-          
 
-             <input type="hidden" name="next" value="{{next}}"> 
+            <input type="hidden" name="next" value="{{next}}">
 
           </form>
+          <p>Dont have an account? <a href="/accounts/register/">sign up</a></p>
+          <div class="get-the-app">
+            <span>Get the app.</span>
+            <div class="badges">
+              <img src="" alt="">
+  
+              <img style="width: 50%;" src="" alt="">
+            </div>
+          </div>
 
         </div>
 
       </div>
-      <div class="card text-center" id="no">
-          <p>Don't have an account? <a href="/accounts/register/">sign-up</a></p>
-      </div>
 
     </div>
-    
     <!-- empty div -->
     <div class="col-md-4"></div>
   </div>

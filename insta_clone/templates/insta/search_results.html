@@ -14,13 +14,13 @@
   {% if posts %}
     {% for new_post in posts %}
       <div class="col-sm-6 col-md-3">
-          <!-- <h1>{{post.title}}</h1>
+           <h1>{{post.title}}</h1>
           <img src="{{post.image}}" alt=""> -->
           <div class="card mb-3">
             <img src="{{new_post.image.url}}" class="img-responsive card-img-top" alt="image1" style="height: 400px; width: 600px;">
           </div>
           <div class="card-body">
-            <!-- <h3>{{new_post.title}}</h3> -->
+             <h3>{{new_post.title}}</h3> -->
             <p> <b>{{new_post.user}}~ </b>{{new_post.caption}}</p>
           </div>
       </div>

@@ -38,13 +38,33 @@ class Profile(models.Model):
 class Post(models.Model):
     image = models.ImageField(upload_to = 'images/')
     image_name = models.CharField(max_length =30)
-    caption = models.TextField(max_length =40)
+    caption = models.TextField(max_length =40,null=True)
     likes = models.CharField(max_length =20,blank =True)
     title = models.CharField(max_length=100, default='')
-    profile = models.ForeignKey(Profile, null = True,related_name='image',on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile, null = True,related_name='poster',on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True, null=True)
-    comment = models.ForeignKey
-    user= models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    user= models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def save_image(self):
+        self.save()
+
+    @classmethod
+    def get_post(cls):
+        post=Post.objects.all()
+        return post
+
+
+
+    def __str__(self):
+        return str(self.caption)
+
+    @classmethod
+    def display_posts(cls):
+        posts = cls.objects.all().order_by('-posted_at')
+        return posts
+
+    def __str__(self):
+        return "%s post" % self.image_name    
    
 
 class Comment(models.Model):

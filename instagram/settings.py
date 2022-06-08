@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'insta_clone',
     'bootstrap4',
     
+    
 ]
 
 MIDDLEWARE = [
@@ -55,10 +56,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'instagram.urls'
 
+TEMPLATE_DIRS = [os.path.join(BASE_DIR / 'templates'),]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ["TEMPLATES_DIRS"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -74,15 +76,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'instagram.wsgi.application'
 
 
+
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'insta_clone',
-        'USER': 'moringa',
-    'PASSWORD':'access',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 

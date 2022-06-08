@@ -19,11 +19,11 @@ from django.urls import reverse
 # Create your views here.
 @login_required(login_url='/accounts/login/')
 def index(request):
-    context = {
-    'posts':Post.objects.all()
-    }
+    posts=Post.objects.all()
+    users=User.objects.all()
+   
     
-    return render(request, 'insta/index.html',context)
+    return render(request, 'insta/index.html',{'posts':posts,'users':users})
 
 # class PostListView(ListView):
 #     model=Post
@@ -62,19 +62,32 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 @login_required(login_url='/accounts/login/')
 def create_post(request):
-    current_user = request.user
 
-    if request.method == 'POST':
-        form = UpdateForm(request.POST,request.FILES)
-        if form.is_valid():
-            p_form = form.save(commit=False)
-            p_form.user = current_user
+    if request.method =='POST':
+        image = request.FILES.get('photo')
+        caption = request.POST.get('caption')
 
-            p_form.save()
-        return redirect('home')
-    else:
-        form = UpdateForm()
-    return render(request,'newpost.html',{"form":form})
+        img=Post(image=image,caption=caption,user=request.user)
+        img.save_image()
+        return redirect('index')
+    return render(request,'insta/newpost.html')
+        
+    
+    # if request.method == 'POST':
+    #     form = UpdateForm(request.POST,request.FILES)
+    #     if form.is_valid():
+    #         form = form.save(commit=False)
+    #         form.user = current_user
+            
+
+    #         form.save()
+    #     return redirect('index')
+    # else:
+    #     form = UpdateForm()
+    # return render(request,'insta/newpost.html',{"form":form})
+
+
+
 
 def likes(request,pk):
     post = Post.objects.get(pk=pk)
@@ -107,6 +120,7 @@ def register(request):
         form = RegistrationForm()
     return render(request, 'django_registration/registration_form.html', {'form':form})
 
+@login_required(login_url='/accounts/login/')
 def profile(request):
     if request.method == 'POST':
 
