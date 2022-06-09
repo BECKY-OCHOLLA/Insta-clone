@@ -1,7 +1,7 @@
 ### Project Description
 An application that is a replication of the instagram app. Users are able to log in, register if they have no accounts.Like pictures and comment on pictures as well as search users based on their profile.Users are also able to update their profiles and add posts.
 ### Live Link
-https://git.heroku.com/bekitainsta.git
+https://bekitainsta.herokuapp.com/
 ### Author
 Becky Ocholla
 ### Setup Instructions
