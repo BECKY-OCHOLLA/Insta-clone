@@ -100,41 +100,28 @@ def create_post(request):
     return render(request, 'insta/newpost.html', {'profile_form': profile_form})
 
 
+# @login_required(login_url='/accounts/login/')
 # def create_post(request):
-   
-    
+#     current_user = request.user
 #     if request.method == 'POST':
+#         form = UpdateForm(request.POST, request.FILES)
         
-#         profile_form = UpdateForm(request.POST,request.FILES, instance=request.user.profile)
+#         if form.is_valid():
+#             post= form.save(commit=False)
+#             post.user = current_user
+#             post.save()
+#             messages.success(request, 'Post Succesfully Uploaded', extra_tags='alert alert-success')              
+#         return redirect('index')
+#     else:
+#         form = UpdateForm()
+#         # messages.error(request, 'Form data is invalid', extra_tags='alert alert-danger')
+#         # return redirect('home')
+#     return render(request, 'insta/newpost.html', {'postform': form, })
 
-#         if profile_form.is_valid():
-#             profile_form.save()
-#             messages.success(request, 'Your profile is updated successfully')
-#             return redirect('profile')
-       
-#         else:
-           
-#            profile_form = UpdateForm(instance=request.user.profile)
 
-#            return render(request, 'insta/newpost.html', {'profile_form': profile_form})
 
-#     return render(request, 'insta/newpost.html', {'profile_form': profile_form})
-        
     
-    # if request.method == 'POST':
-    #     form = UpdateForm(request.POST,request.FILES)
-    #     if form.is_valid():
-    #         form = form.save(commit=False)
-    #         form.user = current_user
-            
-
-    #         form.save()
-    #     return redirect('index')
-    # else:
-    #     form = UpdateForm()
-    # return render(request,'insta/newpost.html',{"form":form})
-
-
+    
 
 
 def likes(request,pk):
@@ -156,7 +143,7 @@ def search_results(request):
 
 def register(request):
     if request.method == 'POST':
-        form = RegistrationForm(request.POST)
+        form = UserRegisterForm(request.POST)
         if form.is_valid():
             
             form.save()
@@ -165,7 +152,7 @@ def register(request):
             messages.success(request, f' Account for {username} has been created successfully!')
             return redirect('home')
     else:
-        form = RegistrationForm()
+        form = UserRegisterForm()
     return render(request, 'django_registration/registration_form.html', {'form':form})
 
 @login_required(login_url='/accounts/login/')
