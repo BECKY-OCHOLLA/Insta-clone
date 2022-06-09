@@ -95,7 +95,6 @@ def create_post(request):
            
            profile_form = UpdateForm(instance=request.user.profile)
 
-           return render(request, 'insta/newpost.html', {'profile_form': profile_form})
 
     return render(request, 'insta/newpost.html', {'profile_form': profile_form})
 
@@ -157,17 +156,18 @@ def register(request):
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
+    # user_form = UserProfile.objects.get(user=request.user)
     if request.method == 'POST':
 
         user_form = UserUpdateForm(request.POST, instance=request.user)
-        prof_form = ProfileUpdateForm(
-            request.POST, request.FILES, instance=request.user)
+        prof_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
 
-        if  prof_form.is_valid():
-            user_form.save=user_form.save
+        if  prof_form.is_valid() and user_form.is_valid():
+            user_form.save()
             prof_form.save()
+            messages.success(request,f'Account succesfully created')
 
-            return user_form.instance
+            return redirect('profile')
             
     else:
         
