@@ -151,7 +151,7 @@ def search_results(request):
         return render(request, 'search.html',{"message":message,"posts": searched_posts})
     else:
         message = "You haven't searched for any term"
-        return render(request,'search.html',{"message":message})
+        return render(request,'insta/search_results.html',{"message":message})
 
 
 def register(request):
@@ -177,11 +177,11 @@ def profile(request):
             request.POST, request.FILES, instance=request.user)
 
         if  prof_form.is_valid():
-            user_form.save()
+            user_form.save=user_form.save
             prof_form.save()
 
-            return redirect('profile')
-
+            return user_form.instance
+            
     else:
         
         prof_form = ProfileUpdateForm(instance=request.user)
