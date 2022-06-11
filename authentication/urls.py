@@ -81,3 +81,8 @@ urlpatterns = [
         name='password_change_done_view'
         )
 ]
+
+# PasswordResetView ->> Ask for Email
+# PasswordResetDoneView  ->> Show him success email message
+# PasswordResetConfirmView  ->> Ask to set a new password
+# PasswordResetCompleteView  ->>  Successfully set your password login
