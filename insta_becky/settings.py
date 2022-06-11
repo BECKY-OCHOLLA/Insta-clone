@@ -12,24 +12,20 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-
-import django_heroku
-import dj_database_url
 from pathlib import Path
-import os
-from decouple import config,Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-ODE=config("MODE", default="dev")
-SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
+SECRET_KEY = '23gdwfji#=24-=*0j9n%%j-zjd&h*(5^ireu44^i9vgiuw^+du'
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -97,30 +93,6 @@ DATABASES = {
     }
 }
 
-if config('MODE')=="dev":
-   DATABASES = {
-       'default': {
-           'ENGINE': 'django.db.backends.postgresql_psycopg2',
-           'NAME': config('DB_NAME'),
-           'USER': config('DB_USER'),
-           'PASSWORD': config('DB_PASSWORD'),
-           'HOST': config('DB_HOST'),
-           'PORT': '',
-       }
-       
-   }
-# production
-else:
-   DATABASES = {
-       'default': dj_database_url.config(
-           default=config('DATABASE_URL')
-       )
-   }
-
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
-
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -161,7 +133,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
 STATICFILES_DIRS = [BASE_DIR/'static_files',]
 
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -181,19 +152,8 @@ EMAIL_FILE_PATH = BASE_DIR / 'emails'
 
 
 cloudinary.config( 
-  cloud_name = config('cloud_name'),
-  api_key = config('api_key') ,
-  api_secret = config('api_secret'),
-  
+  cloud_name = "becky", 
+  api_key = "756394519674228", 
+  api_secret = "2jPC3sxda5h1l5YounK2l1UdKHM"
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-django_heroku.settings(locals())
