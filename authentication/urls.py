@@ -24,11 +24,7 @@ urlpatterns = [
     path('signup/',  SignUpView.as_view(), name='signup_view'),
     path('signout/',  SignOutView.as_view(), name='signout_view'),
     
-    # path('password/reset/', PRView.as_view(), name='password_reset'),
-    # path('password/reset/done/',  PRDone.as_view() ,name='password_reset_done'),
-    # path('password/reset/confirm/<uidb64>/<token>', PRConfirm.as_view() , name='password_reset_confirm'),
-    # path('password/reset/complete/', PRComplete.as_view() , name='password_reset_complete'),
-
+    
     path('password/reset/', 
         PasswordResetView.as_view(
             email_template_name = 'authentication/password_reset_email.html',
@@ -54,17 +50,7 @@ urlpatterns = [
         ) , 
         name='password_reset_complete'),
 
-    # path(
-    #     'password/change/', 
-    #     PWDChangeView.as_view(), 
-    #     name='password_change_view'
-    #     ),
-    # path(
-    #     'password/change/done/', 
-    #     PWDChangeDoneView.as_view(), 
-    #     name='password_change_done_view'
-    #     ),
-
+    
     path(
         'password/change/', 
         PasswordChangeView.as_view(
@@ -82,7 +68,3 @@ urlpatterns = [
         )
 ]
 
-# PasswordResetView ->> Ask for Email
-# PasswordResetDoneView  ->> Show him success email message
-# PasswordResetConfirmView  ->> Ask to set a new password
-# PasswordResetCompleteView  ->>  Successfully set your password login
