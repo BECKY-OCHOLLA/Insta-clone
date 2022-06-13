@@ -6,25 +6,25 @@ https://bekitainsta.herokuapp.com/
 ## Author
 Becky Ocholla
 ## Setup Instructions
-* Cloning
-$ git clone https://github.com/BECKY-OCHOLLA/Insta-clone
-$ cd instagram-clone
+#### Cloning
+* $ git clone https://github.com/BECKY-OCHOLLA/Insta-clone
+* $ cd insta-clone
 
-$ pipenv install request
-Install and activate a Virtual Environment
-$ pipenv shell
+* $ pipenv install request
+* Install and activate a Virtual Environment
+* $ pipenv shell
  
-Set-up a Database
-Set your database User and Password 
-Make Migrations & Migrate
-$ python manage.py makemigrations <DB Name> 
+#### Set-up a Database
+* Set your database User and Password 
+* Make Migrations & Migrate
+* $ python manage.py makemigrations <DB Name> 
 
-$ python manage.py migrate 
-Run the application
-python manage.py runserver 
-Testing the application
-python manage.py test 
-Open the application on your browser 127.0.0.1:8000.
+* $ python manage.py migrate 
+#### Run the application
+* python manage.py runserver 
+#### Testing the application
+* python manage.py test 
+* Open the application on your browser 127.0.0.1:8000.
 
 ### Technologies Used
 Python
